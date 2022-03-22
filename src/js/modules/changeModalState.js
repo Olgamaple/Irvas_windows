@@ -41,6 +41,14 @@ const changeModalState = (state) => {
                 state[prop] = item.value;
                 break;
               }
+              if (state.width && state.height) {
+                document.querySelector('.popup_calc_button').disabled = false;
+              } else {
+                document.querySelector('.popup_calc_button').disabled = true;
+              }
+              if (state.profile) {
+                document.querySelector('.popup_calc_profile_button').disabled = false;
+              }
               // console.log(state);
       });
     });
