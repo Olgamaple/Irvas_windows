@@ -14015,12 +14015,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
 /* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
-/* harmony import */ var _modules_images__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/images */ "./src/js/modules/images.js");
+/* harmony import */ var _modules_openImage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/openImage */ "./src/js/modules/openImage.js");
 
 
 
 
 
+ // import images from './modules/images';
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -14037,8 +14038,9 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
-  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])('.container1', deadline);
-  Object(_modules_images__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])('.container1', deadline); // 
+
+  Object(_modules_openImage__WEBPACK_IMPORTED_MODULE_6__["default"])();
 });
 
 /***/ }),
@@ -14285,45 +14287,6 @@ const forms = state => {
 
 /***/ }),
 
-/***/ "./src/js/modules/images.js":
-/*!**********************************!*\
-  !*** ./src/js/modules/images.js ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-const images = () => {
-  const imgPopup = document.createElement('div'),
-        workSection = document.querySelector('.works'),
-        bigImage = document.createElement('img');
-  imgPopup.classList.add('popup');
-  workSection.appendChild(imgPopup);
-  imgPopup.style.justifyContent = 'center';
-  imgPopup.style.alignItems = 'center';
-  imgPopup.style.display = 'none';
-  imgPopup.appendChild(bigImage);
-  workSection.addEventListener('click', e => {
-    e.preventDefault();
-    let target = e.target;
-
-    if (target && target.classList.contains('preview')) {
-      imgPopup.style.display = 'flex';
-      const path = target.parentNode.getAttribute('href');
-      bigImage.setAttribute('src', path);
-    }
-
-    if (target && target.matches('div.popup')) {
-      imgPopup.style.display = 'none';
-    }
-  });
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (images);
-
-/***/ }),
-
 /***/ "./src/js/modules/modals.js":
 /*!**********************************!*\
   !*** ./src/js/modules/modals.js ***!
@@ -14391,6 +14354,72 @@ const modals = () => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/openImage.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/openImage.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _openModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./openModal */ "./src/js/modules/openModal.js");
+/* harmony import */ var _closeModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./closeModal */ "./src/js/modules/closeModal.js");
+
+ // const images = () => {
+//   const imgPopup = document.createElement('div'),
+//         workSection = document.querySelector('.works'),
+//         bigImage = document.createElement('img');
+//         imgPopup.classList.add('popup');
+//         workSection.appendChild(imgPopup);
+//         imgPopup.style.justifyContent = 'center';
+//         imgPopup.style.alignItems = 'center';
+//         imgPopup.style.display = 'none';
+//         imgPopup.appendChild(bigImage);
+//         workSection.addEventListener('click', (e) => {
+//           e.preventDefault();
+//           let target = e.target;
+//            if (target && target.classList.contains('preview')) {
+//              imgPopup.style.display = 'flex';
+//              const path = target.parentNode.getAttribute('href');
+//              bigImage.setAttribute('src', path);
+//            }
+//            if (target && target.matches('div.popup')) {
+//               imgPopup.style.display = 'none';
+//            }
+//         });
+// };
+// export default images;
+
+function openImage() {
+  const parentImg = document.querySelector('.works'),
+        modalImg = document.createElement('div'),
+        imgBig = document.createElement('img');
+  modalImg.classList.add('popupImg');
+  modalImg.style.cssText = 'display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9;background-color: rgba(0, 0, 0, 0.5);justify-content:center;align-items:center;';
+  parentImg.append(modalImg);
+  imgBig.style.cssText = 'width:auto;height:85vh';
+  modalImg.append(imgBig);
+  parentImg.addEventListener('click', e => {
+    e.preventDefault();
+
+    if (e.target && e.target.classList.contains('preview')) {
+      Object(_openModal__WEBPACK_IMPORTED_MODULE_0__["default"])(modalImg, 'flex');
+      const path = e.target.parentNode.getAttribute('href');
+      imgBig.setAttribute('src', path);
+      imgBig.classList.add('grow');
+    }
+
+    if (e.target && e.target.matches('div.popupImg')) {
+      Object(_closeModal__WEBPACK_IMPORTED_MODULE_1__["default"])(modalImg);
+    }
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (openImage);
 
 /***/ }),
 
