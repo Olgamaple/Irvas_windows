@@ -14055,9 +14055,13 @@ window.addEventListener('DOMContentLoaded', () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 function calcScroll() {
-  const div = document.createElement('div');
-  div.style.cssText = 'width:50px;height:50px;overflow-y:scroll;visibilty:hidden;';
-  document.body.append(div);
+  let div = document.createElement('div');
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.overflowY = 'scroll';
+  div.style.visibility = 'hidden'; // div.style.cssText = 'width:50px;height:50px;overflow-y:scroll;visibilty:hidden;';
+
+  document.body.appendChild(div);
   let scrollWidth = div.offsetWidth - div.clientWidth;
   div.remove();
   return scrollWidth;
@@ -14350,7 +14354,8 @@ const modals = () => {
   bindModal('.phone_link', '.popup', '.popup .popup_close');
   bindModal('.popup_calc_btn', '.popup_calc', '.popup_calc_close');
   bindModal('.popup_calc_button', '.popup_calc_profile', '.popup_calc_profile_close', false);
-  bindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false); // showModalByTime('.popup', 60000);
+  bindModal('.popup_calc_profile_button', '.popup_calc_end', '.popup_calc_end_close', false);
+  showModalByTime('.popup', 60000);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
@@ -14369,30 +14374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _openModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./openModal */ "./src/js/modules/openModal.js");
 /* harmony import */ var _closeModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./closeModal */ "./src/js/modules/closeModal.js");
 
- // const images = () => {
-//   const imgPopup = document.createElement('div'),
-//         workSection = document.querySelector('.works'),
-//         bigImage = document.createElement('img');
-//         imgPopup.classList.add('popup');
-//         workSection.appendChild(imgPopup);
-//         imgPopup.style.justifyContent = 'center';
-//         imgPopup.style.alignItems = 'center';
-//         imgPopup.style.display = 'none';
-//         imgPopup.appendChild(bigImage);
-//         workSection.addEventListener('click', (e) => {
-//           e.preventDefault();
-//           let target = e.target;
-//            if (target && target.classList.contains('preview')) {
-//              imgPopup.style.display = 'flex';
-//              const path = target.parentNode.getAttribute('href');
-//              bigImage.setAttribute('src', path);
-//            }
-//            if (target && target.matches('div.popup')) {
-//               imgPopup.style.display = 'none';
-//            }
-//         });
-// };
-// export default images;
+
 
 function openImage() {
   const parentImg = document.querySelector('.works'),
